@@ -1,9 +1,8 @@
 import { User } from ".";
 
 export interface PostModel {
-    id: string;
+    _id: string;
     text: string;
-    userID: User;
-    themeId: string;
-    createdAt: Date;
+    userId: User;
+    created_at: Date;
 }

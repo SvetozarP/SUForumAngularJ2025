@@ -3,12 +3,8 @@
         Recent posts
     </h2>
     <div>
-        <div class="aside-theme">
-            <a href="#">
-                <h3>Angular </h3>
-                <p>Silvester</p>
-                <p><span>2020-10-14T10:11:52.264Z</span></p>
-            </a>
-        </div>
+        @for (postItem of posts; track postItem._id) {
+        <app-post [post]="postItem"></app-post>
+        }
     </div>
 </div>

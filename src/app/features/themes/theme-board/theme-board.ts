@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ThemesService } from '../../../core/services';
 import { ThemeModel } from '../../../models';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Theme } from "../theme/theme";
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-theme-board',
-  imports: [],
+  imports: [Theme, CommonModule],
   templateUrl: './theme-board.html',
   styleUrl: './theme-board.css'
 })
-export class ThemeBoard implements OnInit {
-
-  themes: ThemeModel[] = [];
+export class ThemeBoard {
   
-  constructor(private themesService: ThemesService) {}
-
-  ngOnInit(): void {
-    this.themesService.getThemes().pipe(takeUntilDestroyed()).subscribe((themes: ThemeModel[]) => {
-      this.themes = themes;
-    });
+  themes$: Observable<ThemeModel[]>;
+  
+  constructor(private themesService: ThemesService) {
+    this.themes$ = this.themesService.getThemes();
   }
+
 }
