@@ -1,6 +1,6 @@
 import { User } from ".";
 
-export interface Theme {
+export interface ThemeModel {
     id: string;
     themeName: string;
     userId: User;

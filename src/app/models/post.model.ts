@@ -1,6 +1,6 @@
 import { User } from ".";
 
-export interface Post {
+export interface PostModel {
     id: string;
     text: string;
     userID: User;
