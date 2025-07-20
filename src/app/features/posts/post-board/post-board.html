@@ -3,7 +3,7 @@
         Recent posts
     </h2>
     <div>
-        @for (postItem of posts; track postItem._id) {
+        @for (postItem of posts$ | async; track postItem._id) {
         <app-post [post]="postItem"></app-post>
         }
     </div>
