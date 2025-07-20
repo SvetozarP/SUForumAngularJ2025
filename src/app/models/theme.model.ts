@@ -1,4 +1,4 @@
-import { User } from "./user.model";
+import { User } from ".";
 
 export interface Theme {
     id: string;
