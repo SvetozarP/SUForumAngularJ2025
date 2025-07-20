@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 export class PostBoard {
 
   posts$: Observable<PostModel[]>;
-  posts: PostModel[] = [];
 
   constructor(private postsService: PostsService) {
     this.posts$ = this.postsService.getRecentPosts();
