@@ -1,8 +1,49 @@
+@if(!isLoggedIn()) {
+   <div class="welcome">
+      <h3>Welcome!</h3>
+      <p>SoftUni forum is a place, where you can post your questions, comment, and discuss problems, which
+          you have in your programming language or in your study in SoftUni.</p>
+      <div class="logged">
+          <ul>
+              <li>
+                  <a routerLink="/login">
+                      <i class="fas fa-sign-in-alt"></i>
+                      Login
+                  </a>
+              </li>
+              <li>
+                  <a routerLink="/register">
+                      <i class="fas fa-user-plus"></i>
+                      Register
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>    
+}
 
-<div class="theme-title">
-<!-- theme component  -->
- @for (themeItem of themes$ | async; track themeItem._id) {
-    <app-theme [theme]="themeItem"></app-theme>
- }
-
+<div class="container">
+   <main>
+      <div class="theme-title">
+         <!-- theme component  -->
+          @for (themeItem of themes$ | async; track themeItem._id) {
+             <app-theme [theme]="themeItem"></app-theme>
+          }
+         
+         </div>
+   </main>
+   <aside>
+      <div class="aside">
+         <h2 class="title">
+            Recent posts
+         </h2>
+         <div>
+            @for (postItem of posts$ | async; track postItem._id) {
+            <app-post [post]="postItem"></app-post>
+            }
+         </div>
+      
+      </div>
+   </aside>
 </div>
+

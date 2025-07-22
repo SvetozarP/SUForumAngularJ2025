@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { NotFound } from './shared/not-found/not-found';
 
 export const routes: Routes = [
     {
@@ -17,5 +18,18 @@ export const routes: Routes = [
     {
         path: 'register',
         loadComponent: () => import('./features/auth/register/register').then(m => m.Register)
+    },
+    {
+        path: 'profile',
+        loadComponent: () => import('./features/profile/profile').then(m => m.Profile)
+    },
+    {
+        path: 'themes',
+        loadComponent: () => import('./features/themes/theme-board/theme-board').then(m => m.ThemeBoard)
+    },
+    {
+        path: `**`,
+        component: NotFound
     }
+    
 ];
