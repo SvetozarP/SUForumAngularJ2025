@@ -28,6 +28,10 @@ export const routes: Routes = [
         loadComponent: () => import('./features/themes/theme-board/theme-board').then(m => m.ThemeBoard)
     },
     {
+        path: 'add-theme',
+        loadComponent: () => import('./features/themes/new-theme/new-theme').then(m => m.NewTheme)
+    },
+    {
         path: `**`,
         component: NotFound
     }
