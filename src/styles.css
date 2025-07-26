@@ -284,3 +284,10 @@ text-shadow: 1px 1px black;
 text-align: center;
 }
 
+
+button:disabled {
+    background-color: #cccccc;  /* light gray */
+    color: #666666;             /* dark gray text */
+    cursor: not-allowed;        /* show "not allowed" cursor */
+    opacity: 0.4;               /* optional: make it look faded */
+  }
