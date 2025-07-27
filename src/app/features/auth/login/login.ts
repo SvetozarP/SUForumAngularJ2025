@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,9 @@ export class Login {
 
   constructor() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, emailValidator]],
+      // can use Validators.pattern(/^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@gmail\.(com|bg)$/)
+      // and then look for this.email?.errors?.['pattern']
       password: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
@@ -33,7 +35,7 @@ export class Login {
   get emailErrorMessage(): string {
     if(this.email?.errors?.['required']) {
       return 'Email is required!';
-    } else if(this.email?.errors?.['email']) {
+    } else if(this.email?.errors?.['emailValidator']) {
       return 'Email is not valid';
     } else {
       return '';
@@ -80,9 +82,23 @@ export class Login {
     });
   }
 
+
+
   private isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^(?=.{6,})[a-zA-Z][a-zA_Z0-9._-]*@gmail\.(com|bg)$/;
     return emailRegex.test(email);
   }
+
+}
+
+export function emailValidator(emailControl: AbstractControl): ValidationErrors | null {
+  const emailRegex = /^(?=.{6,})[a-zA-Z][a-zA-Z0-9._-]*@gmail\.(com|bg)$/;
+  const email = emailControl.value;
+
+  if (email && !emailRegex.test(email)) {
+    return { emailValidator: true} 
+  }
+  return null;
 
 }

@@ -1,4 +1,4 @@
-<form class="register" action="" method="post" (ngSubmit)="onSubmit()">
+<form class="register" [formGroup]="registerForm" action="" method="post" (ngSubmit)="onSubmit()">
 
     <fieldset>
         <h2>Registration Form</h2>
@@ -7,16 +7,14 @@
         <p class="field field-icon">
             <label for="username"><span><i class="fas fa-user"></i></span></label>
             <input 
-            [class.input-error]="usernameError" 
+            [class.input-error]="isUsernmeValid" 
             type="text" 
-            name="username" 
+            formControlName="username"
             id="username" 
             placeholder="Johny"
-            [(ngModel)]="username"
-            (blur)="validateUsername()"
             >
         </p>
-        @if(usernameError) {
+        @if(isUsernmeValid) {
             <p class="error">{{usernameErrorMessage}}</p>
         }
 
@@ -24,16 +22,14 @@
         <p class="field field-icon">
             <label for="email"><span><i class="fas fa-envelope"></i></span></label>
             <input 
-            [class.input-error]="emailError" 
+            [class.input-error]="isEmailValid" 
             type="email" 
-            name="email" 
+            formControlName="email"
             id="email" 
             placeholder="john.doe@gmail.com"
-            [(ngModel)]="email"
-            (blur)="validateEmail()"
             >
         </p>
-        @if(emailError) {
+        @if(isEmailValid) {
             <p class="error">{{emailErrorMessage}}</p>
         }
 
@@ -44,54 +40,50 @@
                 <option value="00359">+359</option>
             </select>
             <input 
-            [class.input-error]="phoneError" 
+            [class.input-error]="isPhoneValid" 
             type="text" 
-            name="tel" 
+            formControlName="phone"
             id="tel" 
             placeholder="885 888 888"
-            [(ngModel)]="phone"
-            (blur)="validatePhone()"
             >
         </p>
-        @if(phoneError) {
+        @if(isPhoneValid) {
             <p class="error">{{phoneErrorMessage}}</p>
         }        
         
         <!-- password -->
-        <p class="field field-icon">
-            <label for="password"><span><i class="fas fa-lock"></i></span></label>
-            <input 
-            [class.input-error]="passwordError" 
-            type="password" 
-            name="password" 
-            id="password" 
-            placeholder="******"
-            [(ngModel)]="password"
-            (blur)="validatePassword()"
-            >
-        </p>
-        @if(passwordError) {
-            <p class="error">{{passwordErrorMessage}}</p>
-        }
+         <div formGroupName="passwords">
+            <p class="field field-icon">
+                <label for="password"><span><i class="fas fa-lock"></i></span></label>
+                <input 
+                [class.input-error]="isPasswordsValid" 
+                type="password" 
+                formControlName="password" 
+                id="password" 
+                placeholder="******"
+                >
+            </p>
+            @if(isPasswordsValid) {
+                <p class="error">{{passwordErrorMessage}}</p>
+            }
 
-        <!-- rePassword -->
-        <p class="field field-icon">
-            <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
-            <input 
-            [class.input-error]="rePasswordError" 
-            type="password" 
-            name="rePassword" 
-            id="rePassword" 
-            placeholder="******"
-            [(ngModel)]="rePassword"
-            (blur)="validateRePassword()"
-            >
-        </p>
-        @if(rePasswordError) {
-            <p class="error">{{rePasswordErrorMessage}}</p>
-        }
+            <!-- rePassword -->
+            <p class="field field-icon">
+                <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
+                <input 
+                [class.input-error]="isPasswordsValid" 
+                type="password" 
+                formControlName="rePassword" 
+                id="rePassword" 
+                placeholder="******"
+                >
+            </p>
+            @if(isPasswordsValid) {
+                <p class="error">{{rePpasswordErrorMessage}}</p>
+            }
+        </div>
 
-        <button type="submit" [disabled]="!isFormValid()">Create Account</button>
+        <button type="submit" [disabled]="registerForm.invalid">Create Account</button>
 
         <p class="text-center">
             Have an account?

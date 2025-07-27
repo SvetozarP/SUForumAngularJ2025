@@ -28,7 +28,7 @@
         @if(passwordError) {
             <p class="error">{{passwordErrorMessage}}</p>
         }
-        <button type="submit" [disabled]="!loginForm.valid">Login</button>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
         <p class="text-center">Have an account? <a routerLink="/register">Register</a></p>
     </fieldset>
 </form>
