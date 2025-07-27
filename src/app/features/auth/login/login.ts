@@ -63,7 +63,7 @@ export class Login {
   onSubmit(): void {
 
     if(this.loginForm.valid) {
-      const [email, password] = this.loginForm.value;
+      const {email, password} = this.loginForm.value;
       const response = this.authService.login(email, password);
       if(response === true) {
         this.router.navigate(['/home']);

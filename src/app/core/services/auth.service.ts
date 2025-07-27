@@ -64,4 +64,13 @@ export class AuthService {
     getCurrentUserID(): string | null {
         return this._currentUser()?.id || null;
     }
+
+    updateUser(id: string | undefined, user: User): void {
+        const index = this._users.findIndex(u => u.id === id);
+        if(index !== -1) {
+            this._users[index] = user;
+        }
+        this._currentUser.set(user);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+    }
 }
