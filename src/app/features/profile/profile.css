@@ -104,3 +104,16 @@
     border-radius: 0.5em !important;
     padding: 0.5em 1.5em !important;
 }
+
+p.error {
+    text-align: left !important;
+    border-radius: 0.5em !important;
+    color: red !important;
+    padding-top: 0 !important;
+    font-weight: bold !important;
+}
+
+.input-error {
+    border-left-color: red !important;
+    border-color: red !important;
+}

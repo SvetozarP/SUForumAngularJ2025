@@ -19,6 +19,7 @@
     <form [formGroup]="profileForm" (ngSubmit)="onSave()">
         <div class="flex">
             <p>Username: </p>
+            <div class="input-container">
             <input 
             [class.input-error]="isUsernmeValid" 
             type="text" 
@@ -29,9 +30,11 @@
             @if(isUsernmeValid) {
                 <p class="error">{{usernameErrorMessage}}</p>
             }
+            </div>
         </div>
         <div class="flex">
             <p>Email: </p>
+            <div class="input-container">
             <input 
             [class.input-error]="isEmailValid" 
             type="email" 
@@ -42,6 +45,7 @@
             @if(isEmailValid) {
                 <p class="error">{{emailErrorMessage}}</p>
             }
+            </div>
         </div>
         <div class="flex">
             <p>Phone: </p>
@@ -56,8 +60,10 @@
                 >
             </div>
         </div>
-        <button class="red-button" type="button" (click)="onCancel()">Cancel</button>
-        <button class="green-button" [disabled]="profileForm.invalid" type="submit">Save</button>
+        <div class="button-container">
+            <button class="red-button" type="button" (click)="onCancel()">Cancel</button>
+            <button class="green-button" [disabled]="profileForm.invalid" type="submit">Save</button>
+        </div>
     </form>
     }
 </div>
