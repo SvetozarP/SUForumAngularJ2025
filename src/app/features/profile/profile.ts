@@ -104,9 +104,15 @@ export class Profile {
         phone,
       }
 
-      this.authService.updateUser(updatedUser?.id, updatedUser);
-      this.isEditMode = false;
-      this.profileForm.reset();
+      this.authService.updateUser(updatedUser).subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.profileForm.reset();
+        },
+        error: (err) => {
+          console.log('Update failed', err);
+        }
+      });
     }
   }
 }

@@ -26,7 +26,7 @@ export class AuthService {
 
     login(email: string, password: string): Observable<User> {
         return this.httpClient.post<ApiUser>(`${this.apiUrl}/login`, {email, password}, {
-            withCredentials: true
+            withCredentials: true // Take httpOnly cookie from server and attach it to the request
         }).pipe(
             map(apiUser => this.mapApiUserToUser(apiUser)),
             tap(user => {
@@ -82,7 +82,7 @@ export class AuthService {
             tel: user.phone
         };
 
-        return this.httpClient.put<ApiUser>(`${this.apiUrl}/users/${user.id}`, apiUser, {
+        return this.httpClient.put<ApiUser>(`${this.apiUrl}/users/profile`, apiUser, {
             withCredentials: true
         }).pipe(
             map(apiUser => this.mapApiUserToUser(apiUser)),
