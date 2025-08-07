@@ -12,3 +12,5 @@ export const loadPostsFailure = createAction(
     '[Posts] Load Posts Failure',
     props<{ error: any }>()
 );
+
+export const loadPostsReset = createAction('[Posts] Load Posts Reset');
