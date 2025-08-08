@@ -1,11 +1,11 @@
 import { createAction, props } from "@ngrx/store";
-import { Post } from "../../../features/themes";
+import { PostModel } from "../../../models";
 
 export const loadPosts = createAction('[Posts] Load Posts');
 
 export const loadPostsSuccess = createAction(
     '[Posts] Load Posts Success', 
-    props<{ posts: Post[] }>()
+    props<{ posts: PostModel[] }>()
 );
 
 export const loadPostsFailure = createAction(
