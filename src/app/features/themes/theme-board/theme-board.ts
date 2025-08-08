@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { AuthService, ThemesService } from '../../../core/services';
 import { PostModel, ThemeModel } from '../../../models';
 import { Theme } from "../theme/theme";
@@ -9,9 +9,9 @@ import { Post } from "../post/post";
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../core/store';
 import { selectPosts } from '../../../core/store/posts/post.selector';
-import { loadPosts } from '../../../core/store/posts/post.actions';
+import { loadPosts, loadPostsReset } from '../../../core/store/posts/post.actions';
 import { selectThemes } from '../../../core/store/themes/themes.selector';
-import { loadThemes } from '../../../core/store/themes/themes.actions';
+import { loadThemes, loadThemesReset } from '../../../core/store/themes/themes.actions';
 
 @Component({
   selector: 'app-theme-board',
@@ -19,7 +19,7 @@ import { loadThemes } from '../../../core/store/themes/themes.actions';
   templateUrl: './theme-board.html',
   styleUrl: './theme-board.css'
 })
-export class ThemeBoard {
+export class ThemeBoard implements OnDestroy {
   private authService = inject(AuthService);
   readonly isLoggedIn = this.authService.isLoggedIn;
 
@@ -39,4 +39,8 @@ export class ThemeBoard {
     this.store.dispatch(loadThemes());
   }
 
+  ngOnDestroy(): void {
+      this.store.dispatch(loadPostsReset());
+      this.store.dispatch(loadThemesReset());
+  }
 }
